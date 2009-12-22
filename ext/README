@@ -1,0 +1,97 @@
+
+PCRE Ruby extension ver0.1
+
+This is Ruby Regex extension module using libpcre.
+
+The PCRE library is a set of functions that implement regular expression pattern matching using the same syntax and semantics as Perl 5.
+PCRE has its own native API, as well as a set of wrapper functions that correspond to the POSIX regular expression API.
+The PCRE library is free, even for building commercial software.(http://www.pcre.org)
+
+This module is a litte faster than Ruby standard Regex.
+It has some additional features like lookbehind assertion (?<=, (?<!.
+Refer to detail information at http://www.pcre.org/man.txt
+
+[Requirement]
+
+* libpcre 3.9+
+* Ruby 1.6.5+
+
+It may be made with other version but not verified.
+
+[Install]
+0st:
+  Install PCRE at http://www.pcre.org for your platform.
+
+1st:
+	% ruby extconf.rb
+	% make
+
+  extconf.rb has following options:
+
+    --with-pcre-include=<dir>
+	PCRE header directory. Default is /usr/local/include.
+
+    --with-pcre-lib=<dir>
+	PCRE library directory. Default is /usr/local/lib.
+
+2nd:
+	# make install
+
+Note:
+
+1. If you get error like 'libpcre not found' when testing, you
+   need to specify library directory on make.
+	% env LD_RUN_PATH=<libpcre.so directory> make
+
+
+[Usage]
+
+If an error occured in method, it raise PCREError exception.
+
+require "pcre" # loading pcre module.
+
+[PCRE option constants]
+
+PCRE_CASELESS        
+PCRE_MULTILINE       
+PCRE_DOTALL          
+PCRE_EXTENDED        
+PCRE_ANCHORED        
+PCRE_DOLLAR_ENDONLY  
+PCRE_EXTRA           
+PCRE_NOTBOL          
+PCRE_NOTEOL          
+PCRE_UNGREEDY        
+PCRE_NOTEMPTY        
+PCRE_UTF8
+
+[PCRE methods]
+
+String#pcre_match(pattern,option=nil)
+   search pattern and return match arrays
+
+String#pcre_match_all(pattern,option=nil)
+   search pattern entirely and return match array of arrays
+
+String#pcre_sub(pattern,str,option=nil)
+   same as String#sub
+
+String#pcre_gsub(pattern,str,option=nil)
+   same as String#gsub
+
+[PCREError class]
+
+ OBJECT VARIABLES (read only)
+    error
+    errno
+
+[History]
+
+  2002-12-15	0.1
+    * Initial Release
+
+
+[Author]
+
+  e-mail: Park Heesob <phsais@nownuri.net>
+  http://home.nownuri.net/~phasis/pcre
